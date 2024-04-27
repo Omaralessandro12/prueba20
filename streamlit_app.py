@@ -17,7 +17,7 @@ width_shape = 224
 height_shape = 224
 
 # Clases
-names = ['NoCovid','Covid']
+names = ['ARAÑA ROJA','MOSCA BLANCA','MOSCA FRUTA','PULGON VERDE','PICUDO ROJO']
 
 
 # Se recibe la imagen y el modelo, devuelve la predicción
