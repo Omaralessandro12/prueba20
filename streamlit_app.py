@@ -10,7 +10,7 @@ from skimage.transform import resize
 
 
 # Path del modelo preentrenado
-MODEL_PATH = 'resnet50_modelo.h5'
+MODEL_PATH = 'models_resnet50.h5'
     
 width_shape = 224
 height_shape = 224
