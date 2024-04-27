@@ -32,11 +32,15 @@ def main():
     img_file_buffer = st.file_uploader("Carga una imagen", type=["png", "jpg", "jpeg"])
     
     if img_file_buffer is not None:
-        image = np.array(Image.open(img_file_buffer))    
-        st.image(image, caption="Imagen", use_column_width=False)
+        # Abrir la imagen y ajustar su tamaño
+        image = Image.open(img_file_buffer)
+        image_resized = image.resize((width_shape, height_shape))
+        image_np = np.array(image_resized)
+        
+        st.image(image_resized, caption="Imagen", use_column_width=False)
     
     if st.button("Predicción"):
-        predictS = model_prediction(image, model)
+        predictS = model_prediction(image_np, model)
         st.success('LA CLASE ES: {}'.format(names[np.argmax(predictS)]))
 
 if __name__ == '__main__':
