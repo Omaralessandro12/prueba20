@@ -10,7 +10,7 @@ from skimage.transform import resize
 
 
 # Path del modelo preentrenado
-MODEL_PATH = 'models/model_MobileNet_Covid.h5'
+MODEL_PATH = 'resnet50_modelo.h5'
 
 # Dimensiones de las imagenes de entrada    
 width_shape = 224
