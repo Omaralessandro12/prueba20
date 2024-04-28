@@ -41,10 +41,16 @@ def main():
         image_np = np.array(image_resized)
         
         st.image(image_resized, caption="Imagen", use_column_width=False)
-    
+    else:
+        st.warning("No se ha seleccionado ninguna imagen.")
+
     if st.button("Predicción"):
-        class_idx, confidence = model_prediction(image_np, model)
-        st.success(f'LA CLASE ES: {names[class_idx]} con una confianza del {confidence:.2%}')
+        if img_file_buffer is not None:
+            class_idx, confidence = model_prediction(image_np, model)
+            st.success(f'LA CLASE ES: {names[class_idx]} con una confianza del {confidence:.2%}')
+        else:
+            st.warning("No se ha seleccionado ninguna imagen, por favor carga una imagen antes de realizar la predicción.")
 
 if __name__ == '__main__':
     main()
+
