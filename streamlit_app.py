@@ -19,8 +19,11 @@ def model_prediction(img, model):
     x = preprocess_input(img_resize * 255)
     x = np.expand_dims(x, axis=0)
     
-    preds = model.predict(x)
-    return preds
+    preds = model.predict(x)[0]  # Solo obtenemos las predicciones para la primera imagen (índice 0)
+    class_idx = np.argmax(preds)  # Índice de la clase predicha
+    confidence = preds[class_idx]  # Nivel de confianza de la predicción
+    
+    return class_idx, confidence
 
 def main():
     # Cargar el modelo
@@ -40,8 +43,8 @@ def main():
         st.image(image_resized, caption="Imagen", use_column_width=False)
     
     if st.button("Predicción"):
-        predictS = model_prediction(image_np, model)
-        st.success('LA CLASE ES: {}'.format(names[np.argmax(predictS)]))
+        class_idx, confidence = model_prediction(image_np, model)
+        st.success(f'LA CLASE ES: {names[class_idx]} con una confianza del {confidence:.2%}')
 
 if __name__ == '__main__':
     main()
