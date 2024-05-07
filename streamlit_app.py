@@ -54,3 +54,10 @@ def main():
 if __name__ == '__main__':
     main()
 
+if __name__ == '__main__':
+    main()
+    
+    if img_file_buffer is None:
+        st.warning("Imagen no detectada. Por favor carga una imagen antes de realizar la predicción.")
+
+
