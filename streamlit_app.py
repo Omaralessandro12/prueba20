@@ -7,38 +7,39 @@ from PIL import Image
 from skimage.transform import resize
 
 # Path del modelo preentrenado
-MODEL_PATH = 'models_resnet50.h5'
+MODEL_PATH = 'resnet50_modelo.h5'
 
 width_shape = 224
 height_shape = 224
 
-names = ['ARAÑA ROJA', 'MOSCA BLANCA', 'MOSCA FRUTA', 'PICUDO ROJO', 'PULGON VERDE']
+names = ['ARAÑA ROJA', 'MOSCA BLANCA', 'MOSCA FRUTA', 'PICUDO ROJO','PULGON VERDE']
 
 def model_prediction(img, model):
-    img_resize = resize(img, (width_shape, height_shape), anti_aliasing=True)
+    img_resize = resize(img, (width_shape, height_shape))
     x = preprocess_input(img_resize * 255)
     x = np.expand_dims(x, axis=0)
-
+    
     preds = model.predict(x)[0]  # Solo obtenemos las predicciones para la primera imagen (índice 0)
     class_idx = np.argmax(preds)  # Índice de la clase predicha
     confidence = preds[class_idx]  # Nivel de confianza de la predicción
-
+    
     return class_idx, confidence
 
 def main():
     # Cargar el modelo
     model = load_model(MODEL_PATH)
+    
+    st.title("Clasificador de Aves :sunglasses:")
 
-    st.title("Clasificador de Insectos :sunglasses:")
-
+    predictS = ""
     img_file_buffer = st.file_uploader("Carga una imagen", type=["png", "jpg", "jpeg"])
-
+    
     if img_file_buffer is not None:
         # Abrir la imagen y ajustar su tamaño
         image = Image.open(img_file_buffer)
         image_resized = image.resize((width_shape, height_shape))
         image_np = np.array(image_resized)
-
+        
         st.image(image_resized, caption="Imagen", use_column_width=False)
     else:
         st.warning("No se ha seleccionado ninguna imagen.")
