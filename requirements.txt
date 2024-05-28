@@ -1,8 +1,13 @@
 streamlit
 tensorflow
 tensorflow-cpu
+streamlit==1.2.0 
+torch==2.0.1 
+ultralytics==8.0.150
+pafy==0.5.5
+av
+tensorflow-cpu
 Pillow
 numpy
 protobuf
 scikit-image
-
